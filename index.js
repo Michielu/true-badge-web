@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
+import setRoutes from './src/routes/index';
+
 const app = express();
 dotenv.config();
 const db = "mongodb://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@ds163517.mlab.com:63517/true-badge";
@@ -22,7 +24,8 @@ MongoClient.connect(db, {
     // Make sure you add the database name and not the collection name
     let datab = database.db("true-badge");
 
-    // require('./routes')(app, datab);
+    setRoutes(app, datab);
+
     app.listen(port, () => {
         console.log('We are live on ' + port);
     });
