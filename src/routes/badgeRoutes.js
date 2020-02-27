@@ -1,8 +1,9 @@
 import BadgeService from "../services/badgeService";
+import BadgeDataLayer from "../dataLayer/BadgeDataLayer";
 
 const Badge = {
     post: (app, db) => {
-        app.post('/badge/upload', function (req, res) {
+        app.post('/badge/upload', async (req, res) => {
             console.log("in here");
             const badgeUrl = BadgeService.generateBadgeID(req.body.name, req.body.time);
 
@@ -15,20 +16,10 @@ const Badge = {
                 expirationCode: 1
             }
 
-            //Create Badge key
-            // db.collection('labels').insertOne(badge, (err, result) => {
-            //     if (err) {
-            //         res.send({
-            //             'error': 'An error has occurred'
-            //         });
-            //     } else {
-            //         console.log("Results: ", result.ops[0])
-            //         res.send(result.ops[0]);
-            //     }
-            // });
+            const huh = await BadgeDataLayer.put(db, badgeData);
 
-            console.log("Upload indeed!", badgeData);
-            res.send("hi");
+            console.log("Huh indeed!", huh);
+            res.send(huh);
         });
     },
     get: (app, db) => {

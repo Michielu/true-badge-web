@@ -7,13 +7,13 @@ const generateBadgeID = (name, time) => {
         badgeUrl += el.slice(0, lettersPerName)
     });
 
-    badgeUrl += getUniqueNum(time);
+    badgeUrl += getUniqueNum(name, time);
     return badgeUrl;
 }
 
 const getUniqueNum = (name, time) => {
     //TODO check with db if badgeUrl is already used
-    return time % 10000
+    return time % 10000;
 }
 
 export default {
