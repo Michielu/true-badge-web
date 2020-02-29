@@ -4,22 +4,9 @@ import BadgeDataLayer from "../dataLayer/BadgeDataLayer";
 const Badge = {
     post: (app, db) => {
         app.post('/badge/upload', async (req, res) => {
-            console.log("in here");
-            const badgeUrl = BadgeService.generateBadgeID(req.body.name, req.body.time);
-
-            const badgeData = {
-                name: req.body.name,
-                imageKey: req.body.imageID,
-                audioKey: req.body.audioID,
-                timestamp: req.body.time,
-                badgeURL: badgeUrl,
-                expirationCode: 1
-            }
-
-            const huh = await BadgeDataLayer.put(db, badgeData);
-
-            console.log("Huh indeed!", huh);
-            res.send(huh);
+            const badgeData = BadgeService.createBadgeData(req);
+            const response = await BadgeDataLayer.put(db, badgeData);
+            res.send(response);
         });
     },
     get: (app, db) => {
