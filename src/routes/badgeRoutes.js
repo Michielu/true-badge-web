@@ -6,7 +6,11 @@ const Badge = {
         app.post('/badge/upload', async (req, res) => {
             const badgeData = BadgeService.createBadgeData(req);
             const response = await BadgeDataLayer.put(db, badgeData);
-            res.send(response);
+            if (response.err) {
+                res.send({ "errorMessage": "Error creating badge" })
+            } else {
+                res.send(response);
+            }
         });
     },
     get: (app, db) => {
