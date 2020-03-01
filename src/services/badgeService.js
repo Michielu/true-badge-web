@@ -1,7 +1,7 @@
 //TODO test this
 const createBadgeData = ({ body }) => {
     const badgeUrl = generateBadgeID(body.name, body.time);
-    return {
+    let badgeData = {
         name: body.name,
         imageKey: body.imageID,
         audioKey: body.audioID,
@@ -9,6 +9,15 @@ const createBadgeData = ({ body }) => {
         badgeURL: badgeUrl,
         expirationCode: 1
     }
+    if (!body.name || !body.audioID || !body.time) {
+        badgeData = {
+            err: {
+                "errorMessage": "Invalid badge data",
+                "errorMessageLong": "Name, audioID, or time cannot be undefined"
+            }
+        }
+    }
+    return badgeData
 }
 
 const generateBadgeID = (name, time) => {
@@ -29,6 +38,31 @@ const getUniqueNum = (name, time) => {
     return time % 10000;
 }
 
+const formulateBadgeData = ({ err, result }) => {
+    if (err) {
+        return { err, result };
+    }
+
+    //No badge found with that BadgeURL
+    if (result.length == 0) {
+        return {
+            isValidBadgeURL: false
+        }
+    } else if (result.length > 1) {
+        //TODO really bad error. 
+        // There should only be one Badge being returned!! 
+    }
+    else {
+        result[0]["isValidBadgeURL"] = true;
+        return {
+            result: result[0]
+        }
+    }
+}
+
+
+
 export default {
-    createBadgeData
+    createBadgeData,
+    formulateBadgeData
 }
