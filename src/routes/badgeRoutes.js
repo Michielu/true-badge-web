@@ -5,17 +5,24 @@ const Badge = {
     post: (app, db) => {
         app.post('/badge/upload', async (req, res) => {
             const badgeData = BadgeService.createBadgeData(req);
+            if (badgeData.err) {
+                res.send(badgeData.err);
+            }
             const response = await BadgeDataLayer.put(db, badgeData);
             if (response.err) {
-                res.send({ "errorMessage": "Error creating badge" })
+                res.send({ "errorMessage": "Error creating badge", "errorMessageLong": "Error stroring badge to database" })
             } else {
                 res.send(response);
             }
         });
     },
     get: (app, db) => {
-        app.post('/badge/retrieve', function (req, res) {
-            console.log("Retrieve indeed!", req);
+        app.get('/b/:id', async (req, res) => {
+            const badgeURL = req.params.id;
+            const response = await BadgeDataLayer.get(db, badgeURL);
+            const returnData = BadgeService.formulateBadgeData(response);
+            //TODO use imageKey and audioKey to get actual data
+            res.send(returnData);
         });
     },
     test: (app, db) => {
