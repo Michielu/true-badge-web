@@ -3,5 +3,7 @@
 import BadgeRoutes from './badgeRoutes';
 
 export default (app, db) => {
-    BadgeRoutes.post(app, db);
+    BadgeRoutes.post(app, db),
+        BadgeRoutes.get(app, db),
+        BadgeRoutes.test(app, db)
 }
