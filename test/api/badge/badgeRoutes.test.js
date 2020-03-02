@@ -28,14 +28,34 @@ describe('Test badgeRoutes', () => {
         await connection.close();
     });
 
-    it('test badge post return data', async () => {
+    it('test badge post: return data', async () => {
         const res = await BadgeDataLayer.put(db, badgeTestData);
         expect(res.result).toEqual(badgeTestData);
     });
 
-    it('test badge post stores badge', async () => {
+    it('test badge post: stores badge', async () => {
         const badgeCollection = db.collection('badge');
         const res = await badgeCollection.findOne({ badgeURL: 'JohnDoe12093' });
         expect(res).toEqual(badgeTestData);
     });
+
+    it('test badge get: retrieves data. Format not checked ', async () => {
+        const res = await BadgeDataLayer.get(db, 'JohnDoe12093');
+        expect(res.result).not.toBe(null);
+    });
+
+    it('test badge get: retrieves data. Format check', async () => {
+        const res = await BadgeDataLayer.get(db, 'JohnDoe12093');
+        expect(res.result[0]).toEqual(badgeTestData);
+        expect(res.err).toBe(undefined);
+    });
+
+    it('test badge get: incorrect badgeURL', async () => {
+        const res = await BadgeDataLayer.get(db, 'invalidURL123');
+        expect(res.result[0]).toEqual(undefined);
+    });
+    it('test badge get: err', async () => {
+        //TODO how to get error response.. mock! 
+    });
+
 });
