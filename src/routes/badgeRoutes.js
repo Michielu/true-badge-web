@@ -25,6 +25,7 @@ const Badge = {
             res.send(returnData);
         });
     },
+    //TODO clean this and fix est
     test: (app, db) => {
         app.post('/user', function (req, res) {
             console.log("Retrieve indeed!", req.body);

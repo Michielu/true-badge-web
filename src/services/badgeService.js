@@ -54,9 +54,7 @@ const formulateBadgeData = ({ err, result }) => {
     }
     else {
         result[0]["isValidBadgeURL"] = true;
-        return {
-            result: result[0]
-        }
+        return result[0]
     }
 }
 
