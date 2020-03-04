@@ -1,6 +1,7 @@
+import BadgeDataLayer from "../dataLayer/BadgeDataLayer";
 //TODO test this
-const createBadgeData = ({ body }) => {
-    const badgeUrl = generateBadgeID(body.name, body.time);
+const createBadgeData = async ({ body }, db) => {
+    const badgeUrl = await generateUniqueBadgeID(body.name, body.time, db);
     let badgeData = {
         name: body.name,
         imageKey: body.imageID,
@@ -20,22 +21,33 @@ const createBadgeData = ({ body }) => {
     return badgeData
 }
 
-const generateBadgeID = (name, time) => {
-    let badgeUrl = "";
+const generateUniqueBadgeID = async (name, time, db) => {
+    let badgeUrlName = getNamePortionOfBadgeUrl(name);
+    let uniqueNum = await getUniqueNum(badgeUrlName, time, db);
+    return badgeUrlName + uniqueNum;
+}
+
+const getNamePortionOfBadgeUrl = (name) => {
+    let badgeUrlName = "";
     let nameSplit = name.split(" ");
     const lettersPerName = Math.ceil(8 / nameSplit.length);
     nameSplit.forEach((el) => {
-        badgeUrl += el.slice(0, lettersPerName)
+        badgeUrlName += el.slice(0, lettersPerName)
     });
-
-    badgeUrl += getUniqueNum(name, time);
-    return badgeUrl;
+    return badgeUrlName;
 }
 
-//TODO test this. Take this out of this class? Because it'll have db connection
-const getUniqueNum = (name, time) => {
-    //TODO check with db if badgeUrl is already used
-    return time % 10000;
+const getUniqueNum = async (badgeUrlName, time, db) => {
+    let uniqueNum = time % 10000;
+    let isUnique = false;
+    let badgeData;
+    while (!isUnique) {
+        uniqueNum = Math.abs(uniqueNum - 1);
+        badgeData = await BadgeDataLayer.get(db, badgeUrlName + uniqueNum);
+        isUnique = (badgeData.result.length == 0);
+    }
+
+    return uniqueNum;
 }
 
 const formulateBadgeData = ({ err, result }) => {

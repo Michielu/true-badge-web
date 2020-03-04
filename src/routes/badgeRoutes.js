@@ -4,7 +4,7 @@ import BadgeDataLayer from "../dataLayer/BadgeDataLayer";
 const Badge = {
     post: (app, db) => {
         app.post('/badge/upload', async (req, res) => {
-            const badgeData = BadgeService.createBadgeData(req);
+            const badgeData = await BadgeService.createBadgeData(req, db);
             if (badgeData.err) {
                 res.send(badgeData.err);
             }
@@ -28,7 +28,6 @@ const Badge = {
     //TODO clean this and fix est
     test: (app, db) => {
         app.post('/user', function (req, res) {
-            console.log("Retrieve indeed!", req.body);
             res.send("received!")
         });
     },
