@@ -1,5 +1,7 @@
 
 import BadgeService from "../../../src/services/badgeService";
+import BadgeDataLayer from "../../../src/dataLayer/BadgeDataLayer";
+
 describe('Test badgeRoutes', () => {
     const badgeTestData = {
         body: {
@@ -56,12 +58,21 @@ describe('Test badgeRoutes', () => {
 
     //Mock  generateBadgeID?  Yes for practice. TODO
     it('Test createBadgeData', () => {
+        // const spy = jest.spyOn(BadgeDataLayer, 'get').mockImplementation((db, badgeUrl) => {
+        //     return { "err": null, "result": [expected] }
+        // });
+        // const BadgeServiceSpy = jest.spyOn(BadgeService, 'getUniqueNum').mockImplementation(("badgeUrlName", 10000, null) => {
+        //     return 4350;
+        // });
+
         const badge = BadgeService.createBadgeData(badgeTestData);
+        expect(spy).toHaveBeenCalled();
         expect(badge).toEqual(expected);
+        // spy.mockRestore();
     });
 
-    it('Test generateBadgeID', () => {
-        const badge = BadgeService.createBadgeData(badgeTestData);
+    it('Test generateBadgeID', async () => {
+        const badge = await BadgeService.createBadgeData(badgeTestData);
         expect(badge.badgeURL).toEqual(expected.badgeURL);
     });
 
