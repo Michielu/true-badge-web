@@ -1,4 +1,4 @@
-const badgeTestData = {
+const badgeServiceData = {
     body: {
         name: "John Doe",
         imageID: "jsfkslgslfjdklfj23",
@@ -8,17 +8,27 @@ const badgeTestData = {
         expirationCode: 1
     }
 }
-const expected =
+const badgeServiceDataExpected =
 {
     name: "John Doe",
     imageKey: "jsfkslgslfjdklfj23",
     audioKey: "ui23jgwk9sv8dv893k",
     timestamp: 1582858631340,
-    badgeURL: "JohnDoe1340",
+    badgeURL: "JohnDoe1339",
     expirationCode: 1
 }
 
-const formulateBadgeDataData = {
+const badgeServiceDataExpected2 =
+{
+    name: "John Doe",
+    imageKey: "jsfkslgslfjdklfj23",
+    audioKey: "ui23jgwk9sv8dv893k",
+    timestamp: 1582858631340,
+    badgeURL: "JohnDoe1338",
+    expirationCode: 1
+}
+
+const badgeServiceFormulateBadgeData = {
     result: [{
         _id: "5e5ae51a4615fc8274d28667",
         name: 'michielu menning',
@@ -30,11 +40,11 @@ const formulateBadgeDataData = {
     }]
 }
 
-const formulateBadgeDataDataNoResult = {
+const badgeServiceFormulateBadgeDataNoResult = {
     result: []
 }
 
-const formulateBadgeDataExpected =
+const badgeServiceFormulateBadgeDataExpected =
 {
     _id: "5e5ae51a4615fc8274d28667",
     name: 'michielu menning',
@@ -45,15 +55,16 @@ const formulateBadgeDataExpected =
     expirationCode: 1,
     isValidBadgeURL: true
 }
-const formulateBadgeDataDataNoResultExpected = {
+const badgeServiceFormulateBadgeDataInvalidURL = {
     isValidBadgeURL: false
 }
 
 export default {
-    badgeTestData,
-    expected,
-    formulateBadgeDataData,
-    formulateBadgeDataDataNoResult,
-    formulateBadgeDataExpected,
-    formulateBadgeDataDataNoResultExpected
+    badgeServiceData,
+    badgeServiceDataExpected,
+    badgeServiceDataExpected2,
+    badgeServiceFormulateBadgeData, //formulateBadgeData
+    badgeServiceFormulateBadgeDataNoResult, //formulateBadgeDataNoResult
+    badgeServiceFormulateBadgeDataExpected, //formulateBadgeDataExpected
+    badgeServiceFormulateBadgeDataInvalidURL //formulateBadgeDataNoResultExpected
 }

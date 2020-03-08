@@ -15,7 +15,6 @@ describe('Test badgeRoutes', () => {
             useUnifiedTopology: true
         });
         db = await connection.db(process.env.TEST_DB_NAME);
-
     });
 
     afterAll(async () => {
@@ -23,14 +22,14 @@ describe('Test badgeRoutes', () => {
     });
 
     it('test badge post: return data', async () => {
-        const res = await BadgeDataLayer.put(db, testData.badgeTestData.body);
-        expect(res.result).toEqual(testData.badgeTestData.body);
+        const res = await BadgeDataLayer.put(db, testData.badgeServiceData.body);
+        expect(res.result).toEqual(testData.badgeServiceData.body);
     });
 
     it('test badge post: stores badge', async () => {
         const badgeCollection = db.collection('badge');
         const res = await badgeCollection.findOne({ badgeURL: 'JohnDoe12093' });
-        expect(res).toEqual(testData.badgeTestData.body);
+        expect(res).toEqual(testData.badgeServiceData.body);
     });
 
     it('test badge get: retrieves data. Format not checked ', async () => {
@@ -40,7 +39,7 @@ describe('Test badgeRoutes', () => {
 
     it('test badge get: retrieves data. Format check', async () => {
         const res = await BadgeDataLayer.get(db, 'JohnDoe12093');
-        expect(res.result[0]).toEqual(testData.badgeTestData.body);
+        expect(res.result[0]).toEqual(testData.badgeServiceData.body);
         expect(res.err).toBe(undefined);
     });
 
@@ -48,6 +47,7 @@ describe('Test badgeRoutes', () => {
         const res = await BadgeDataLayer.get(db, 'invalidURL123');
         expect(res.result[0]).toEqual(undefined);
     });
+
     it('test badge get: err', async () => {
         //TODO how to get error response.. mock! 
     });
