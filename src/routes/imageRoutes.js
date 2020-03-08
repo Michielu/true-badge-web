@@ -1,61 +1,34 @@
 
-const multer = require('multer');
+import multer from 'multer';
 const storage = multer.diskStorage({
     destination: function (req, res, cb) {
         cb(null, 'uploads/')
     }
 });
 const upload = multer({ storage: storage });
-const fs = require('fs');
-// import Img from '../modals/ImgModal';
 
 import ImageDataLayer from '../dataLayer/ImageDataLayer';
+import ImageService from '../services/imageService';
 
 const BadgeImage = {
     post: (app, db) => {
         app.post('/image/upload', upload.single('file'), async (req, res) => {
-            // var new_img = new Img;
-            // console.log("File is :", req.body, req.file);
-            // new_img.img.data = fs.readFileSync(req.file.path)
-            // // new_img.img.data = fs.readFileSync(req.body.image)
-            // new_img.img.contentType = 'image/jpeg';
-            // new_img.save();
-
-            var newImg = fs.readFileSync(req.file.path);
-            console.log("req.body", req.file, " body: ", req.body)
-            // var newImg = fs.readFileSync(req.body.file);
-            // encode the file as a base64 string.
-            var encImg = newImg.toString('base64');
-            var newItem = {
-                description: req.body.description,
-                contentType: req.file.mimetype,
-                size: req.file.size,
-                img: Buffer(encImg, 'base64')
-            };
-            const response = await ImageDataLayer.put(db, newItem);
-            console.log("Response: ", response);
+            const badgeImageData = ImageService.configureBadgeData(req);
+            const response = await ImageDataLayer.put(db, badgeImageData);
             if (response.err) {
                 res.send({ "errorMessage": "Error uploading image", "errorMessageLong": "Error uploading image to database" })
             } else {
                 res.send(response);
             }
-            // res.send(req.body); //Send image back for yolos
         });
     },
     get: (app, db) => {
         app.get('/image/:id', async (req, res) => {
-            console.log("Image ID: ", req.params.id);
-            const badgeURL = req.params.id; //req.params.id; //TODO this is test
-            const response = await ImageDataLayer.get(db, badgeURL);
-            console.log("In imageROutes: ", response);
-            // res.setHeader('content-type', response.result.contentType);
-
-            // const returnData = BadgeService.formulateBadgeData(response);
-            //TODO use imageKey and audioKey to get actual data
+            const imageID = ImageService.generateIdObjectForMongoSearch(req.params.id);
+            const response = await ImageDataLayer.get(db, imageID);
             res.send(response);
         });
-    },
-
+    }
 }
 
 export default BadgeImage;

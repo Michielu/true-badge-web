@@ -24,24 +24,7 @@ const Badge = {
             //TODO use imageKey and audioKey to get actual data
             res.send(returnData);
         });
-    },
-    //TODO clean this and fix est
-    test: (app, db) => {
-        app.post('/user', function (req, res) {
-            res.send("received!")
-        });
-    },
-}
-
-//Separate Audio
-const Audio = {
-    post: (app, db) => {
-        app.post('/p/audio', (req, res) => {
-
-        });
     }
 }
-
-
 
 export default Badge;
