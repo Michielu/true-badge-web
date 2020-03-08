@@ -1,12 +1,11 @@
 const { MongoClient } = require('mongodb');
 
 import BadgeDataLayer from "../../../src/dataLayer/BadgeDataLayer.js";
-import testData from '../../config/testData';
+import testData from '../../config/badgeTestData';
 
 describe('Test badgeRoutes', () => {
     let connection;
     let db;
-
 
     beforeAll(async () => {
         //process.env.MONGO_URL is cached locally in node_modules/.cache
@@ -49,7 +48,7 @@ describe('Test badgeRoutes', () => {
     });
 
     it('test badge get: err', async () => {
-        //TODO how to get error response.. mock! 
+        //TODO how to get error response.. 
     });
 
 });

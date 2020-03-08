@@ -18,13 +18,24 @@ const badgeServiceDataExpected =
     expirationCode: 1
 }
 
-const badgeServiceDataExpected2 =
+const badgeServiceData2 = {
+    body: {
+        name: "John Doe",
+        imageID: "jsfkslgslfjdklfj23",
+        audioID: "ui23jgwk9sv8dv893k",
+        time: 1582858633456,
+        badgeURL: "JohnDoe3456",
+        expirationCode: 1
+    }
+}
+
+const badgeServiceData2Expected =
 {
     name: "John Doe",
     imageKey: "jsfkslgslfjdklfj23",
     audioKey: "ui23jgwk9sv8dv893k",
-    timestamp: 1582858631340,
-    badgeURL: "JohnDoe1338",
+    timestamp: 1582858633456,
+    badgeURL: "JohnDoe3454",
     expirationCode: 1
 }
 
@@ -62,9 +73,10 @@ const badgeServiceFormulateBadgeDataInvalidURL = {
 export default {
     badgeServiceData,
     badgeServiceDataExpected,
-    badgeServiceDataExpected2,
-    badgeServiceFormulateBadgeData, //formulateBadgeData
-    badgeServiceFormulateBadgeDataNoResult, //formulateBadgeDataNoResult
-    badgeServiceFormulateBadgeDataExpected, //formulateBadgeDataExpected
-    badgeServiceFormulateBadgeDataInvalidURL //formulateBadgeDataNoResultExpected
+    badgeServiceData2,
+    badgeServiceData2Expected,
+    badgeServiceFormulateBadgeData,
+    badgeServiceFormulateBadgeDataNoResult,
+    badgeServiceFormulateBadgeDataExpected,
+    badgeServiceFormulateBadgeDataInvalidURL
 }

@@ -3,7 +3,7 @@ const polyfill = require('@babel/polyfill');
 
 import BadgeService from "../../../src/services/badgeService";
 import BadgeDataLayer from "../../../src/dataLayer/BadgeDataLayer";
-import testData from '../../config/testData';
+import testData from '../../config/badgeTestData';
 import badgeService from '../../__mocks__/badgeService';
 
 describe('Test badgeRoutes', () => {
@@ -23,24 +23,21 @@ describe('Test badgeRoutes', () => {
         await connection.close();
     });
 
-    //Mock  generateBadgeID?  Yes for practice. TODO
     it('Test createBadgeData', async () => {
-        // const spy = jest.spyOn(BadgeDataLayer, 'get').mockImplementation(() => {
-        //     return { "err": null, "result": [badgeServiceDataExpected] }
-        // });
-
         const badge = await BadgeService.createBadgeData(testData.badgeServiceData, db);
-        // expect(spy).toHaveBeenCalled();
         expect(badge).toEqual(testData.badgeServiceDataExpected);
         expect(badge.badgeURL).toEqual(testData.badgeServiceDataExpected.badgeURL);
-
     });
 
     it('Test getUniqueNum -- different URL because person with BadgeURL is already present', async () => {
-        const badge1 = await BadgeService.createBadgeData(testData.badgeServiceData, db);
+        const spy = jest.spyOn(BadgeDataLayer, 'get');
+        const badge1 = await BadgeService.createBadgeData(testData.badgeServiceData2, db);
+        expect(spy).toHaveBeenCalledTimes(1);
+
         await BadgeDataLayer.put(db, badge1);
-        const badge2 = await BadgeService.createBadgeData(testData.badgeServiceData, db);
-        expect(badge2).toEqual(testData.badgeServiceDataExpected2);
+        const badge2 = await BadgeService.createBadgeData(testData.badgeServiceData2, db);
+        expect(spy).toHaveBeenCalledTimes(3);
+        expect(badge2).toEqual(testData.badgeServiceData2Expected);
     });
 
     it('test badge get: formulateBadgeData -- accurate data', async () => {
@@ -57,10 +54,4 @@ describe('Test badgeRoutes', () => {
         const returnData = BadgeService.formulateBadgeData({ err: "This has an error" });
         expect(returnData).toEqual({ err: "This has an error" });
     });
-
-    //TO Test
-    /**
-     * Create Badge (get unique badgeUrl)
-     * Create badge (get different unique badgeURL)
-     */
 });
