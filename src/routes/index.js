@@ -7,5 +7,6 @@ export default (app, db) => {
     BadgeRoutes.post(app, db),
         BadgeRoutes.get(app, db),
         ImageRoutes.post(app, db),
+        ImageRoutes.get(app, db),
         BadgeRoutes.test(app, db)
 }
