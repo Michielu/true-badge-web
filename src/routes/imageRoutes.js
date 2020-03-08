@@ -35,7 +35,7 @@ const BadgeImage = {
             const response = await ImageDataLayer.put(db, newItem);
             console.log("Response: ", response);
             if (response.err) {
-                res.send({ "errorMessage": "Error creating badge", "errorMessageLong": "Error stroring badge to database" })
+                res.send({ "errorMessage": "Error uploading image", "errorMessageLong": "Error uploading image to database" })
             } else {
                 res.send(response);
             }
@@ -44,7 +44,8 @@ const BadgeImage = {
     },
     get: (app, db) => {
         app.get('/image/:id', async (req, res) => {
-            const badgeURL = "5e6418512d49b74310d7168e"; //req.params.id; //TODO this is test
+            console.log("Image ID: ", req.params.id);
+            const badgeURL = req.params.id; //req.params.id; //TODO this is test
             const response = await ImageDataLayer.get(db, badgeURL);
             console.log("In imageROutes: ", response);
             // res.setHeader('content-type', response.result.contentType);

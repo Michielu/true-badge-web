@@ -5,11 +5,12 @@ const ImageDataLayer = {
     put: async (db, imageData) => {
         console.log("image Data: ", imageData)
         const res = await db.collection(collectionName).insertOne(imageData);
-        return { "err": res.err, "result": res.ops[0] };
+        console.log("res in imageDatalayer: ", res.ops[0]["_id"]);
+        return { "err": res.err, "result": res.ops[0]["_id"] };
     },
     get: async (db, imageID) => {
         const details = {
-            '_id': new ObjectID("5e64389318ca864a4e6d15ca")
+            '_id': new ObjectID(imageID)
         };
         const res = await db.collection(collectionName).find(details).toArray();
 
