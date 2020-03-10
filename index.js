@@ -33,3 +33,5 @@ MongoClient.connect(db, {
         console.log('We are live on ' + port);
     });
 })
+//Export for testing purposes
+export default app;
