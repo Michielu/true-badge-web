@@ -25,7 +25,8 @@
   "scripts": {
     "dev": "start nodemon",
     "start": "nodemon --exec babel-node index.js --presets @babel/preset-env",
-    "test": "jest"
+    "test": "jest",
+    "test -debug": "jest --detectOpenHandles"
   },
   "babel": {
     "presets": [
