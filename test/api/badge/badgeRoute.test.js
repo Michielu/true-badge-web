@@ -40,7 +40,7 @@ describe('Test Image Routes', () => {
         app.close();
     });
 
-    it('Gets the test endpoint', async done => {
+    it('Badge post endpoint', async done => {
         // Sends GET Request to /test endpoint
         const res = await request.post('/badge/upload')
             .send(testData.badgeServiceData.body);
@@ -51,5 +51,18 @@ describe('Test Image Routes', () => {
         expect(res.status).toBe(200)
         expect(returnedJSON.result).toEqual(testData.badgeServiceDataExpected)
         done()
-    })
+    });
+
+    it('Badge get endpoint', async done => {
+        // Sends GET Request to /test endpoint
+        const res = await request.get('/b/' + testData.badgeServiceData.body.badgeURL);
+
+        console.log("res :", res.body);
+        // const returnedJSON = JSON.parse(res.text);
+        delete res.body["_id"];
+
+        expect(res.status).toBe(200)
+        expect(res.body).toEqual(testData.badgeServiceDataExpected2)
+        done()
+    });
 });

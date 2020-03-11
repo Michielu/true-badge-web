@@ -4,7 +4,7 @@ const badgeServiceData = {
         imageID: "jsfkslgslfjdklfj23",
         audioID: "ui23jgwk9sv8dv893k",
         time: 1582858631340,
-        badgeURL: "JohnDoe12093",
+        badgeURL: "JohnDoe1339",
         expirationCode: 1
     }
 }
@@ -14,6 +14,17 @@ const badgeServiceDataExpected =
     imageKey: "jsfkslgslfjdklfj23",
     audioKey: "ui23jgwk9sv8dv893k",
     timestamp: 1582858631340,
+    badgeURL: "JohnDoe1339",
+    expirationCode: 1
+}
+
+const badgeServiceDataExpected2 =
+{
+    name: "John Doe",
+    imageKey: "jsfkslgslfjdklfj23",
+    audioKey: "ui23jgwk9sv8dv893k",
+    timestamp: 1582858631340,
+    isValidBadgeURL: true,
     badgeURL: "JohnDoe1339",
     expirationCode: 1
 }
@@ -73,6 +84,7 @@ const badgeServiceFormulateBadgeDataInvalidURL = {
 export default {
     badgeServiceData,
     badgeServiceDataExpected,
+    badgeServiceDataExpected2,
     badgeServiceData2,
     badgeServiceData2Expected,
     badgeServiceFormulateBadgeData,
