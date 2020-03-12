@@ -6,7 +6,7 @@ const { MongoClient } = require('mongodb');
 import testData from '../../config/badgeTestData';
 import BadgeRoutes from '../../../src/routes/badgeRoutes';
 
-describe('Test Image Routes', () => {
+describe('Test Badge Routes', () => {
     let connection;
     let db;
     let request;
@@ -36,7 +36,7 @@ describe('Test Image Routes', () => {
 
     it('Badge post endpoint', async done => {
         // Sends GET Request to /test endpoint
-        const res = await request.post('/badge/upload')
+        const res = await request.post('/image/upload')
             .send(testData.badgeServiceData.body);
 
         const returnedJSON = JSON.parse(res.text);
@@ -49,6 +49,7 @@ describe('Test Image Routes', () => {
 
     it('Badge get endpoint', async done => {
         // Sends GET Request to /test endpoint
+        //Upload badge so it's not dependment on test one. I'm not testing /badge/upload
         await request.post('/badge/upload')
             .send(testData.badgeServiceData.body);
         const res = await request.get('/b/' + testData.badgeServiceData.body.badgeURL);
