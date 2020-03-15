@@ -4,14 +4,13 @@ const ObjectID = require('mongodb').ObjectID;
 
 const AudioService = {
     configureAudioData: (req) => {
-        console.log("Configure data: ", req.file, req.body)
-        const newImg = fs.readFileSync(req.file.path);
-        const encImg = newImg.toString('base64');
+        const newAudio = fs.readFileSync(req.file.path);
+        const encAudio = newAudio.toString('base64');
         return {
             description: req.body.description,
             contentType: req.file.mimetype,
             size: req.file.size,
-            img: Buffer.from(encImg, 'base64')
+            audio: Buffer.from(encAudio, 'base64')
         };
     },
     generateIdObjectForMongoSearch: (id) => {
