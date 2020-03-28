@@ -4,8 +4,8 @@ const createBadgeData = async ({ body }, db) => {
     const badgeUrl = await generateUniqueBadgeID(body.name, body.time, db);
     let badgeData = {
         name: body.name,
-        imageKey: body.imageID,
-        audioKey: body.audioID,
+        imageID: body.imageID,
+        audioID: body.audioID,
         timestamp: body.time,
         badgeURL: badgeUrl,
         expirationCode: 1

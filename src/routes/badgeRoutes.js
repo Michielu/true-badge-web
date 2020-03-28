@@ -21,7 +21,6 @@ const Badge = {
             const badgeURL = req.params.id;
             const response = await BadgeDataLayer.get(db, badgeURL);
             const returnData = BadgeService.formulateBadgeData(response);
-            //TODO use imageKey and audioKey to get actual data
             res.send(returnData);
         });
     }
