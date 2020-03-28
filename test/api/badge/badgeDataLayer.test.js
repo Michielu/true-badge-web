@@ -27,17 +27,17 @@ describe('Test badge dataLayer', () => {
 
     it('test badge post: stores badge', async () => {
         const badgeCollection = db.collection('badge');
-        const res = await badgeCollection.findOne({ badgeURL: 'JohnDoe12093' });
+        const res = await badgeCollection.findOne({ badgeURL: 'JohnDoe1339' });
         expect(res).toEqual(testData.badgeServiceData.body);
     });
 
     it('test badge get: retrieves data. Format not checked ', async () => {
-        const res = await BadgeDataLayer.get(db, 'JohnDoe12093');
+        const res = await BadgeDataLayer.get(db, 'JohnDoe1339');
         expect(res.result).not.toBe(null);
     });
 
     it('test badge get: retrieves data. Format check', async () => {
-        const res = await BadgeDataLayer.get(db, 'JohnDoe12093');
+        const res = await BadgeDataLayer.get(db, 'JohnDoe1339');
         expect(res.result[0]).toEqual(testData.badgeServiceData.body);
         expect(res.err).toBe(undefined);
     });

@@ -6,6 +6,12 @@ const { MongoClient } = require('mongodb');
 import testData from '../../config/badgeTestData';
 import BadgeRoutes from '../../../src/routes/badgeRoutes';
 
+/**
+ * To avoid jest async error,
+ * go to index and comment out MongoClient.connect
+ * function
+ */
+
 describe('Test Badge Routes', () => {
     let connection;
     let db;
@@ -36,7 +42,7 @@ describe('Test Badge Routes', () => {
 
     it('Badge post endpoint', async done => {
         // Sends GET Request to /test endpoint
-        const res = await request.post('/image/upload')
+        const res = await request.post('/badge/upload')
             .send(testData.badgeServiceData.body);
 
         const returnedJSON = JSON.parse(res.text);
@@ -57,6 +63,16 @@ describe('Test Badge Routes', () => {
 
         expect(res.status).toBe(200)
         expect(res.body).toEqual(testData.badgeServiceDataExpected2)
+        done()
+    });
+
+    it('Badge get endpoint: invalid url', async done => {
+        // Sends GET Request to /test endpoint
+        const res = await request.get('/b/' + "invalidURL");
+        console.log("Res body: ", res.body)
+
+        expect(res.status).toBe(200)
+        expect(res.body).toEqual(testData.badgeServiceFormulateBadgeDataInvalidURL)
         done()
     });
 });
