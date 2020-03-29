@@ -7,7 +7,7 @@ let multerStorage = "";
 if (process.env.NODE_ENV === 'prod') {
     multerStorage = multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, path.resolve(__dirname, 'build/uploads'))
+            cb(null, 'build/uploads/')
         },
         filename: function (req, file, cb) {
             cb(null, file.fieldname + '_' + Date.now() + '_' + file.originalname)
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'prod') {
 else {
     multerStorage = multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, path.resolve(__dirname, 'build'))
+            cb(null, 'build/')
         },
         filename: function (req, file, cb) {
             cb(null, file.fieldname + '_' + Date.now() + '_' + file.originalname)
