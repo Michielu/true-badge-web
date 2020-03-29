@@ -2,8 +2,9 @@ import express from 'express';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import '@babel/polyfill'
 
-import setRoutes from './src/routes/index';
+import setRoutes from './routes/index';
 
 const app = express();
 dotenv.config();
