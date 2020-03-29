@@ -8,7 +8,7 @@ import setRoutes from './src/routes/index';
 const app = express();
 dotenv.config();
 const db = "mongodb://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@ds163517.mlab.com:63517/" + process.env.DB_NAME;
-const port = 3000;
+const port = process.env.PORT || 3000;
 // app.use(cors); //This stops everything??? 
 // Body Parse is a middleware for http requests
 // extract the entire body portion of an incoming request stream and exposes it on req.body
