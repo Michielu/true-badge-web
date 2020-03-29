@@ -1,11 +1,8 @@
 
 import multer from 'multer';
-const storage = multer.diskStorage({
-    destination: function (req, res, cb) {
-        cb(null, 'uploads/')
-    }
-});
-const upload = multer({ storage: storage });
+import multerStorage from '../config/multerStorage';
+
+const upload = multer({ storage: multerStorage });
 
 import AudioDataLayer from '../dataLayer/AudioDataLayer';
 import AudioService from '../services/audioService';
