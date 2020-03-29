@@ -26,17 +26,13 @@ describe('Test Image Routes', () => {
     it('test image post: return data', async () => {
         const res = await ImageDataLayer.put(db, testData.dataLayerPostData);
         imageID = res.result;
-        expect(res.err).toBe(undefined);
         //Cannot predict the imageID 
+        expect(res.err).toBe(undefined);
     });
 
     it('test badge post: stores badge', async () => {
         const imageCollection = db.collection('image');
-        console.log("iamgeID: ", imageID)
         const res2 = await imageCollection.findOne({ _id: new ObjectID(imageID) });
         expect(res2).toEqual(testData.dataLayerPostData);
     });
-
-
-
 });
