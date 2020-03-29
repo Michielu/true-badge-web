@@ -26,7 +26,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "clean": "rm -rf build && mkdir build",
+    "clean": "rm -rf build uploads/* && mkdir build build/uploads",
     "build-babel": "babel src --out-dir ./build/src  --source-maps",
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./build/src/index.js",
