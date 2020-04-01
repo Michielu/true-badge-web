@@ -4,7 +4,14 @@ import BadgeRoutes from './badgeRoutes';
 import ImageRoutes from './imageRoutes';
 import AudioRoutes from './audioRoutes';
 
+const initRoute = (app, db) => {
+    app.get('/', async (req, res) => {
+        res.send("Welcome to true badge web");
+    });
+}
+
 export default (app, db) => {
+    initRoute(app, db);
     BadgeRoutes.post(app, db),
         BadgeRoutes.get(app, db),
         ImageRoutes.post(app, db),
