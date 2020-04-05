@@ -1,4 +1,4 @@
-import app from '../../../index';
+import app from '../../src/index';
 import supertest from 'supertest';
 
 const { MongoClient } = require('mongodb');
