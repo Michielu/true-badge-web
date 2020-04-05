@@ -1,16 +1,17 @@
 import BadgeDataLayer from "../dataLayer/BadgeDataLayer";
 //TODO test this
 const createBadgeData = async ({ body }, db) => {
-    const badgeUrl = await generateUniqueBadgeID(body.name, body.time, db);
+    const badgeUrl = await generateUniqueBadgeID(body.name, body.timestamp, db);
     let badgeData = {
         name: body.name,
         imageID: body.imageID,
         audioID: body.audioID,
-        timestamp: body.time,
+        timestamp: body.timestamp,
         badgeURL: badgeUrl,
         expirationCode: 1
     }
-    if (!body.name || !body.audioID || !body.time) {
+    console.log("badgeDta: ", badgeData);
+    if (!body.name || !body.audioID || !body.timestamp) {
         badgeData = {
             err: {
                 "errorMessage": "Invalid badge data",
@@ -21,9 +22,9 @@ const createBadgeData = async ({ body }, db) => {
     return badgeData
 }
 
-const generateUniqueBadgeID = async (name, time, db) => {
+const generateUniqueBadgeID = async (name, timestamp, db) => {
     let badgeUrlName = getNamePortionOfBadgeUrl(name);
-    let uniqueNum = await getUniqueNum(badgeUrlName, time, db);
+    let uniqueNum = await getUniqueNum(badgeUrlName, timestamp, db);
     return badgeUrlName + uniqueNum;
 }
 
@@ -37,8 +38,8 @@ const getNamePortionOfBadgeUrl = (name) => {
     return badgeUrlName;
 }
 
-const getUniqueNum = async (badgeUrlName, time, db) => {
-    let uniqueNum = time % 10000;
+const getUniqueNum = async (badgeUrlName, timestamp, db) => {
+    let uniqueNum = timestamp % 10000;
     let isUnique = false;
     let badgeData;
     while (!isUnique) {
