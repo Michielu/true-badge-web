@@ -81,6 +81,11 @@ const badgeServiceFormulateBadgeDataInvalidURL = {
     isValidBadgeURL: false
 }
 
+const POSTInvalidRequest = {
+    "errorMessage": "Invalid request",
+    "errorMessageLong": "Data was in incorrect format"
+}
+
 export default {
     badgeServiceData,
     badgeServiceDataExpected,
@@ -90,5 +95,6 @@ export default {
     badgeServiceFormulateBadgeData,
     badgeServiceFormulateBadgeDataNoResult,
     badgeServiceFormulateBadgeDataExpected,
-    badgeServiceFormulateBadgeDataInvalidURL
+    badgeServiceFormulateBadgeDataInvalidURL,
+    POSTInvalidRequest
 }

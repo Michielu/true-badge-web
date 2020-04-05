@@ -1,25 +1,25 @@
 import BadgeDataLayer from "../dataLayer/BadgeDataLayer";
-//TODO test this
 const createBadgeData = async ({ body }, db) => {
-    const badgeUrl = await generateUniqueBadgeID(body.name, body.timestamp, db);
-    let badgeData = {
-        name: body.name,
-        imageID: body.imageID,
-        audioID: body.audioID,
-        timestamp: body.timestamp,
-        badgeURL: badgeUrl,
-        expirationCode: 1
-    }
-    console.log("badgeDta: ", badgeData);
-    if (!body.name || !body.audioID || !body.timestamp) {
-        badgeData = {
+    try {
+        const badgeUrl = await generateUniqueBadgeID(body.name, body.timestamp, db);
+        let badgeData = {
+            name: body.name,
+            imageID: body.imageID,
+            audioID: body.audioID,
+            timestamp: body.timestamp,
+            badgeURL: badgeUrl,
+            expirationCode: 1
+        }
+        return badgeData
+    } catch{
+        return {
             err: {
-                "errorMessage": "Invalid badge data",
-                "errorMessageLong": "Name, audioID, or time cannot be undefined"
+                "errorMessage": "Invalid request",
+                "errorMessageLong": "Data was in incorrect format"
             }
         }
     }
-    return badgeData
+
 }
 
 const generateUniqueBadgeID = async (name, timestamp, db) => {

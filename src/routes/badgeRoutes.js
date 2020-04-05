@@ -8,11 +8,13 @@ const Badge = {
             if (badgeData.err) {
                 res.send(badgeData.err);
             }
-            const response = await BadgeDataLayer.put(db, badgeData);
-            if (response.err) {
-                res.send({ "errorMessage": "Error creating badge", "errorMessageLong": "Error stroring badge to database" })
-            } else {
-                res.send(response);
+            else {
+                const response = await BadgeDataLayer.put(db, badgeData);
+                if (response.err) {
+                    res.send({ "errorMessage": "Error creating badge", "errorMessageLong": "Error stroring badge to database" })
+                } else {
+                    res.send(response);
+                }
             }
         });
     },

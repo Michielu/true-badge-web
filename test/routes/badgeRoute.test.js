@@ -1,22 +1,14 @@
-import app from '../../src/index';
 import supertest from 'supertest';
+import { MongoClient } from 'mongodb';
 
-const { MongoClient } = require('mongodb');
-
+import app from '../../src/config/app';
 import testData from '../config/badgeTestData';
 import BadgeRoutes from '../../src/routes/badgeRoutes';
-
-/**
- * To avoid jest async error,
- * go to index and comment out MongoClient.connect
- * function
- */
 
 describe('Test Badge Routes', () => {
     let connection;
     let db;
     let request;
-    let server;
 
     beforeAll(async () => {
         //process.env.MONGO_URL is cached locally in node_modules/.cache
@@ -31,19 +23,18 @@ describe('Test Badge Routes', () => {
         BadgeRoutes.post(app, db);
         BadgeRoutes.get(app, db);
 
-        server = await app.listen(4000);
         request = supertest(app);
     });
 
-    afterAll(async (done) => {
-        await connection.close();
-        server.close();
+    afterAll(() => {
+        connection.close();
     });
 
-    it('Badge post endpoint', async done => {
-        // Sends GET Request to /test endpoint
+
+    test('POST /badge/upload', async done => {
         const res = await request.post('/badge/upload')
-            .send(testData.badgeServiceData.body);
+            .send(testData.badgeServiceData.body)
+            .set('Accept', 'application/json');
 
         const returnedJSON = JSON.parse(res.text);
         delete returnedJSON.result["_id"];
@@ -53,8 +44,32 @@ describe('Test Badge Routes', () => {
         done()
     });
 
-    it('Badge get endpoint', async done => {
-        // Sends GET Request to /test endpoint
+    test('POST /badge/upload -- invalid input data', async done => {
+        const res = await request.post('/badge/upload')
+            .send({})
+            .set('Accept', 'application/json');
+
+        console.log("res is : '", res.body);
+
+        expect(res.status).toBe(200)
+        expect(res.body).toEqual(testData.POSTInvalidRequest)
+        done()
+    });
+
+    test.skip('POST /badge/upload -- invalid request', async done => {
+        //TODO mock  BadgeDataLayer.put to return an err 
+        const res = await request.post('/badge/upload')
+            .send({})
+            .set('Accept', 'application/json');
+
+        console.log("res is : '", res.body);
+
+        expect(res.status).toBe(200)
+        expect(res.body).toEqual(testData.POSTInvalidRequest)
+        done()
+    });
+
+    it('GET /b/:id', async done => {
         //Upload badge so it's not dependment on test one. I'm not testing /badge/upload
         await request.post('/badge/upload')
             .send(testData.badgeServiceData.body);
@@ -66,10 +81,9 @@ describe('Test Badge Routes', () => {
         done()
     });
 
-    it('Badge get endpoint: invalid url', async done => {
+    it('GET /b/:id -- invalid url', async done => {
         // Sends GET Request to /test endpoint
         const res = await request.get('/b/' + "invalidURL");
-        console.log("Res body: ", res.body)
 
         expect(res.status).toBe(200)
         expect(res.body).toEqual(testData.badgeServiceFormulateBadgeDataInvalidURL)
