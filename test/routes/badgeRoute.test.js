@@ -3,8 +3,8 @@ import supertest from 'supertest';
 
 const { MongoClient } = require('mongodb');
 
-import testData from '../../config/badgeTestData';
-import BadgeRoutes from '../../../src/routes/badgeRoutes';
+import testData from '../config/badgeTestData';
+import BadgeRoutes from '../../src/routes/badgeRoutes';
 
 /**
  * To avoid jest async error,

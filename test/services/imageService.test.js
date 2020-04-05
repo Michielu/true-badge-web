@@ -1,9 +1,9 @@
 const { MongoClient } = require('mongodb');
 const polyfill = require('@babel/polyfill');
 
-import ImageService from "../../../src/services/ImageService";
-import ImageDataLayer from "../../../src/dataLayer/ImageDataLayer";
-import testData from '../../config/imageTestData';
+import ImageService from "../../src/services/ImageService";
+import ImageDataLayer from "../../src/dataLayer/ImageDataLayer";
+import testData from '../config/imageTestData';
 import ImageService from '../../__mocks__/imageService';
 
 describe('Test ImageRoutes', () => {

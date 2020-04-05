@@ -1,10 +1,10 @@
 const { MongoClient } = require('mongodb');
 const polyfill = require('@babel/polyfill');
 
-import BadgeService from "../../../src/services/badgeService";
-import BadgeDataLayer from "../../../src/dataLayer/BadgeDataLayer";
-import testData from '../../config/badgeTestData';
-import badgeService from '../../__mocks__/badgeService';
+import BadgeService from "../../src/services/badgeService";
+import BadgeDataLayer from "../../src/dataLayer/BadgeDataLayer";
+import testData from '../config/badgeTestData';
+import badgeService from '../__mocks__/badgeService';
 
 describe('Test badgeRoutes', () => {
     let connection;

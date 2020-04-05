@@ -3,8 +3,8 @@ import supertest from 'supertest';
 
 const { MongoClient } = require('mongodb');
 
-import testData from '../../config/imageTestData';
-import BadgeRoutes from '../../../src/routes/imageRoutes';
+import testData from '../config/imageTestData';
+import BadgeRoutes from '../../src/routes/imageRoutes';
 
 describe('Test Image Routes', () => {
     let connection;

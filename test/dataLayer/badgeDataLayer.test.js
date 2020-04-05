@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
-import BadgeDataLayer from "../../../src/dataLayer/BadgeDataLayer.js";
-import testData from '../../config/badgeTestData';
+import BadgeDataLayer from "../../src/dataLayer/BadgeDataLayer.js";
+import testData from '../config/badgeTestData';
 
 describe('Test badge dataLayer', () => {
     let connection;

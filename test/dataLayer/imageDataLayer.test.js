@@ -1,8 +1,8 @@
 const { MongoClient } = require('mongodb');
 const ObjectID = require('mongodb').ObjectID;
 
-import ImageDataLayer from "../../../src/dataLayer/ImageDataLayer.js";
-import testData from '../../config/imageTestData';
+import ImageDataLayer from "../../src/dataLayer/ImageDataLayer.js";
+import testData from '../config/imageTestData';
 
 
 describe('Test Image Routes', () => {
