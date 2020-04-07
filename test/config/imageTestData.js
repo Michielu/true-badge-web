@@ -17,7 +17,17 @@ const dataLayerGetReturnData = {
         }]
 }
 
+const POSTEndpoint = {
+    body: {
+        description: "description"
+    },
+    file: {
+        mimetype: 'image/jpeg',
+        size: 90777,
+    }
+}
 export default {
     dataLayerPostData,
-    dataLayerGetReturnData
+    dataLayerGetReturnData,
+    POSTEndpoint
 }

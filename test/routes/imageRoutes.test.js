@@ -1,16 +1,19 @@
-import app from '../../src/index';
 import supertest from 'supertest';
+import { MongoClient } from 'mongodb';
 
-const { MongoClient } = require('mongodb');
-
+import app from '../../src/config/app';
 import testData from '../config/imageTestData';
-import BadgeRoutes from '../../src/routes/imageRoutes';
+import ImageRoutes from '../../src/routes/imageRoutes';
+// import imageService from '../config/imageTestData';
+// import a from '../../src/services/imageService'
+
+
+jest.mock('../../src/services/imageService');
 
 describe('Test Image Routes', () => {
     let connection;
     let db;
     let request;
-    let server;
 
     beforeAll(async () => {
         //process.env.MONGO_URL is cached locally in node_modules/.cache
@@ -22,24 +25,22 @@ describe('Test Image Routes', () => {
         // Make sure you add the database name and not the collection name
         db = await connection.db(process.env.TEST_DB_NAME);
 
-        BadgeRoutes.post(app, db);
-        BadgeRoutes.get(app, db);
+        ImageRoutes.post(app, db);
+        ImageRoutes.get(app, db);
 
-        server = await app.listen(4000);
         request = supertest(app);
     });
 
-    afterAll(async (done) => {
-        await connection.close();
-        server.close();
+    afterAll(() => {
+        connection.close();
     });
 
-    it('Image post endpoint', async done => {
-        // Sends GET Request to /test endpoint
+    it.only('POST /image/upload', async done => {
+        //TODO mock BadgeService.createBadgeData
         const res = await request.post('/image/upload')
-            .send(testData.dataLayerPostData);
+            .send(testData.POSTEndpoint);
 
-        console.log("res: ", res);
+        // console.log("res: ", res);
         const returnedJSON = JSON.parse(res.text);
         delete returnedJSON.result["_id"];
 
