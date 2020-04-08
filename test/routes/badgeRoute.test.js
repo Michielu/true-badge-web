@@ -31,7 +31,7 @@ describe('Test Badge Routes', () => {
     });
 
 
-    test('POST /badge/upload', async done => {
+    it('POST /badge/upload', async done => {
         const res = await request.post('/badge/upload')
             .send(testData.badgeServiceData.body)
             .set('Accept', 'application/json');
@@ -44,25 +44,20 @@ describe('Test Badge Routes', () => {
         done()
     });
 
-    test('POST /badge/upload -- invalid input data', async done => {
+    it('POST /badge/upload -- invalid input data', async done => {
         const res = await request.post('/badge/upload')
             .send({})
             .set('Accept', 'application/json');
-
-        console.log("res is : '", res.body);
 
         expect(res.status).toBe(200)
         expect(res.body).toEqual(testData.POSTInvalidRequest)
         done()
     });
 
-    test.skip('POST /badge/upload -- invalid request', async done => {
-        //TODO mock  BadgeDataLayer.put to return an err 
+    it('POST /badge/upload -- invalid request', async done => {
         const res = await request.post('/badge/upload')
             .send({})
             .set('Accept', 'application/json');
-
-        console.log("res is : '", res.body);
 
         expect(res.status).toBe(200)
         expect(res.body).toEqual(testData.POSTInvalidRequest)
@@ -70,7 +65,8 @@ describe('Test Badge Routes', () => {
     });
 
     it('GET /b/:id', async done => {
-        //Upload badge so it's not dependment on test one. I'm not testing /badge/upload
+        //Upload badge so it's not dependment on test one. 
+        //Not testing /badge/upload in this test
         await request.post('/badge/upload')
             .send(testData.badgeServiceData.body);
         const res = await request.get('/b/' + testData.badgeServiceData.body.badgeURL);
@@ -82,7 +78,6 @@ describe('Test Badge Routes', () => {
     });
 
     it('GET /b/:id -- invalid url', async done => {
-        // Sends GET Request to /test endpoint
         const res = await request.get('/b/' + "invalidURL");
 
         expect(res.status).toBe(200)
