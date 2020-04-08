@@ -4,11 +4,7 @@ import { MongoClient } from 'mongodb';
 import app from '../../src/config/app';
 import testData from '../config/imageTestData';
 import ImageRoutes from '../../src/routes/imageRoutes';
-// import imageService from '../config/imageTestData';
-// import a from '../../src/services/imageService'
-
-
-jest.mock('../../src/services/imageService');
+import ImageService from '../../src/services/imageService';
 
 describe('Test Image Routes', () => {
     let connection;
@@ -35,29 +31,68 @@ describe('Test Image Routes', () => {
         connection.close();
     });
 
-    it.only('POST /image/upload', async done => {
-        //TODO mock BadgeService.createBadgeData
+    it('POST /image/upload', async done => {
+        ImageService.configureBadgeData = jest.fn().mockImplementation((a) => {
+            const req = a.body;
+            return {
+                description: req.body.description,
+                contentType: req.file.mimetype,
+                size: req.file.size,
+                img: ["Binary"]
+            };
+        });
         const res = await request.post('/image/upload')
             .send(testData.POSTEndpoint);
 
-        // console.log("res: ", res);
         const returnedJSON = JSON.parse(res.text);
-        delete returnedJSON.result["_id"];
 
         expect(res.status).toBe(200)
-        expect(returnedJSON.result).toEqual(testData.badgeServiceDataExpected)
+        expect(returnedJSON.result).toBeTruthy();
+        expect(returnedJSON.errorMessage).toBeUndefined();
         done()
     });
 
-    it('Image get endpoint', async done => {
-        //Upload image so it's not dependent
-        // await request.post('/badge/upload')
-        //     .send(testData.badgeServiceData.body);
-        // const res = await request.get('/b/' + testData.badgeServiceData.body.badgeURL);
-        // delete res.body["_id"];
+    it('POST /image/upload -- invalid input', async done => {
+        const res = await request.post('/image/upload').send({});
+        const returnedJSON = JSON.parse(res.text);
 
-        // expect(res.status).toBe(200)
-        // expect(res.body).toEqual(testData.badgeServiceDataExpected2)
-        // done()
+        expect(res.status).toBe(200)
+        expect(returnedJSON).toEqual(testData.returnPOSTEndpoingInvalid)
+        done()
+    });
+
+    it('GET /image/upload', async done => {
+        ImageService.configureBadgeData = jest.fn().mockImplementation((a) => {
+            const req = a.body;
+            return {
+                description: req.body.description,
+                contentType: req.file.mimetype,
+                size: req.file.size,
+                img: ["Binary"]
+            };
+        });
+        const uploadedImageRes = await request.post('/image/upload')
+            .send(testData.POSTEndpoint);
+
+        const uploadJSON = JSON.parse(uploadedImageRes.text);
+
+        expect(uploadJSON.result).toBeTruthy();
+        expect(uploadJSON.errorMessage).toBeUndefined();
+
+        const imageID = uploadJSON.result;
+
+        const res = await request.get('/image/' + imageID);
+        delete res.body.result[0]["_id"];
+        expect(res.status).toBe(200)
+        expect(res.body.result[0]).toEqual(testData.returnGET)
+        done()
+    });
+
+    it('GET /image/upload -- invalid input', async done => {
+        const res = await request.get('/image/InvalidImageKey');
+        expect(res.status).toBe(200)
+        console.log("body :", res.body)
+        expect(res.body).toEqual(testData.rerutnGETInvalid)
+        done()
     });
 });
