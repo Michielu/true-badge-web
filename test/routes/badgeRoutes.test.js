@@ -2,7 +2,7 @@ import supertest from 'supertest';
 import { MongoClient } from 'mongodb';
 
 import app from '../../src/config/app';
-import testData from '../config/badgeTestData';
+import { routesData as testData } from '../config/badgeTestData';
 import BadgeRoutes from '../../src/routes/badgeRoutes';
 
 describe('Test Badge Routes', () => {
@@ -33,14 +33,14 @@ describe('Test Badge Routes', () => {
 
     it('POST /badge/upload', async done => {
         const res = await request.post('/badge/upload')
-            .send(testData.badgeServiceData.body)
+            .send(testData.badgeRoutePostData.body)
             .set('Accept', 'application/json');
 
         const returnedJSON = JSON.parse(res.text);
         delete returnedJSON.result["_id"];
 
         expect(res.status).toBe(200)
-        expect(returnedJSON.result).toEqual(testData.badgeServiceDataExpected)
+        expect(returnedJSON.result).toEqual(testData.badgeRoutePostDataExpected)
         done()
     });
 
@@ -68,12 +68,12 @@ describe('Test Badge Routes', () => {
         //Upload badge so it's not dependment on test one. 
         //Not testing /badge/upload in this test
         await request.post('/badge/upload')
-            .send(testData.badgeServiceData.body);
-        const res = await request.get('/b/' + testData.badgeServiceData.body.badgeURL);
+            .send(testData.badgeRoutePostData.body);
+        const res = await request.get('/b/' + testData.badgeRoutePostData.body.badgeURL);
         delete res.body["_id"];
 
         expect(res.status).toBe(200)
-        expect(res.body).toEqual(testData.badgeServiceDataExpected2)
+        expect(res.body).toEqual(testData.badgeRoutePostReturn)
         done()
     });
 
@@ -81,7 +81,7 @@ describe('Test Badge Routes', () => {
         const res = await request.get('/b/' + "invalidURL");
 
         expect(res.status).toBe(200)
-        expect(res.body).toEqual(testData.badgeServiceFormulateBadgeDataInvalidURL)
+        expect(res.body).toEqual(testData.formulateBadgeDataInvalidURL)
         done()
     });
 });
