@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 const ObjectID = require('mongodb').ObjectID;
 
 import AudioDataLayer from "../../src/dataLayer/AudioDataLayer.js";
-import testData from '../config/audioTestData';
+import { dataLayerData as testData } from '../config/audioTestData';
 
 
 describe('Test Audio Routes', () => {

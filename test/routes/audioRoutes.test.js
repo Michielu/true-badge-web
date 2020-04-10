@@ -2,7 +2,7 @@ import supertest from 'supertest';
 import { MongoClient } from 'mongodb';
 
 import app from '../../src/config/app';
-import testData from '../config/audioTestData';
+import { routesData as testData } from '../config/audioTestData';
 import AudioRoutes from '../../src/routes/audioRoutes';
 import AudioService from '../../src/services/audioService';
 
