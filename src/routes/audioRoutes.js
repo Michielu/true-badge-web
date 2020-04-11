@@ -11,8 +11,8 @@ const BadgeAudio = {
     post: (app, db) => {
         app.post('/audio/upload', upload.single('file'), async (req, res) => {
             try {
-                const BadgeAudioData = AudioService.configureAudioData(req);
-                const response = await AudioDataLayer.put(db, BadgeAudioData);
+                const badgeAudioData = AudioService.configureAudioData(req);
+                const response = await AudioDataLayer.put(db, badgeAudioData);
                 if (response.err) {
                     res.send({ "errorMessage": "Error uploading audio", "errorMessageLong": "Error uploading audio to database" })
                 } else {
