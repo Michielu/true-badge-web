@@ -2,7 +2,7 @@ import supertest from 'supertest';
 import { MongoClient } from 'mongodb';
 
 import app from '../../src/config/app';
-import testData from '../config/imageTestData';
+import { routesData as testData } from '../config/imageTestData';
 import ImageRoutes from '../../src/routes/imageRoutes';
 import ImageService from '../../src/services/imageService';
 
