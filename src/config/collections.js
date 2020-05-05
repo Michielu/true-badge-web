@@ -1,7 +1,9 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-export const audioCollection = process.env.NODE_ENV === 'prod' ? "prod-audio" : "local-audio";
-export const badgeCollection = process.env.NODE_ENV === 'prod' ? "prod-badge" : "local-badge";
-export const imageCollection = process.env.NODE_ENV === 'prod' ? "prod-image" : "local-image";
+/* 'prod', 'test', or 'local' */
+const env = process.env.NODE_ENV;
 
+export const audioCollection = env + "-audio";
+export const badgeCollection = env + "-badge";
+export const imageCollection = env + "-image";
