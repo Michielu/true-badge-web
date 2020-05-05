@@ -8,7 +8,9 @@ const createBadgeData = async ({ body }, db) => {
             audioID: body.audioID,
             timestamp: body.timestamp,
             badgeURL: badgeUrl,
-            expirationCode: 1
+            expirationCode: body.expirationCode,
+            expirationDate: add90Days(body.timestamp),
+            email: body.email
         }
         return badgeData
     } catch{
@@ -66,11 +68,16 @@ const formulateBadgeData = ({ err, result }) => {
         // There should only be one Badge being returned!! 
     }
     else {
+        //TODO check expirationDate with Date(result[0].expirationDate)
         result[0]["isValidBadgeURL"] = true;
         return result[0]
     }
 }
 
+const add90Days = (currentTime) => {
+    const thirtyDays = 2592000000;
+    return currentTime + 3 * thirtyDays;
+}
 
 
 export default {
