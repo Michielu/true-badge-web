@@ -31,7 +31,7 @@ describe('Test Image Routes', () => {
     });
 
     it('test badge post: stores badge', async () => {
-        const imageCollection = db.collection('image');
+        const imageCollection = db.collection('test-image');
         const res2 = await imageCollection.findOne({ _id: new ObjectID(imageID) });
         expect(res2).toEqual(testData.dataLayerPostData);
     });

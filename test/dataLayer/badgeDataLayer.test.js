@@ -26,7 +26,7 @@ describe('Test badge dataLayer', () => {
     });
 
     it('test badge post: stores badge', async () => {
-        const badgeCollection = db.collection('badge');
+        const badgeCollection = db.collection('test-badge');
         const res = await badgeCollection.findOne({ badgeURL: 'TimDoe3132' });
         console.log({ res })
         delete res["_id"];

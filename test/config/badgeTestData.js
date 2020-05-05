@@ -69,6 +69,9 @@ export const serviceData = {
         badgeURL: 'michmenn4350',
         expirationCode: 1,
         isValidBadgeURL: true
+    },
+    formulateBadgeDataInvalidURL: {
+        isValidBadgeURL: false
     }
 }
 

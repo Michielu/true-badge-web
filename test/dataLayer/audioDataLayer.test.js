@@ -31,7 +31,7 @@ describe('Test Audio Routes', () => {
     });
 
     it('test badge post: stores badge', async () => {
-        const audioCollection = db.collection('audio');
+        const audioCollection = db.collection('test-audio');
         const res2 = await audioCollection.findOne({ _id: new ObjectID(audioID) });
         expect(res2).toEqual(testData.dataLayerPostData);
     });

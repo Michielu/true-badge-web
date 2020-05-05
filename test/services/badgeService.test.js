@@ -4,7 +4,6 @@ const polyfill = require('@babel/polyfill');
 import BadgeService from "../../src/services/badgeService";
 import BadgeDataLayer from "../../src/dataLayer/BadgeDataLayer";
 import { serviceData as testData } from '../config/badgeTestData';
-import badgeService from '../__mocks__/badgeService';
 
 describe('Test badgeRoutes', () => {
     let connection;
@@ -47,7 +46,7 @@ describe('Test badgeRoutes', () => {
 
     it('test badge get: formulateBadgeData -- invalid url ', async () => {
         const returnData = BadgeService.formulateBadgeData(testData.badgeServiceFormulateBadgeDataNoResult);
-        expect(returnData).toEqual(testData.badgeServiceFormulateBadgeDataInvalidURL);
+        expect(returnData).toEqual(testData.formulateBadgeDataInvalidURL);
     });
 
     it('test badge get: formulateBadgeData -- error ', async () => {
