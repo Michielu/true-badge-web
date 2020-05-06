@@ -1,6 +1,4 @@
 const { MongoClient } = require('mongodb');
-const polyfill = require('@babel/polyfill');
-
 
 describe('insert', () => {
     let connection;

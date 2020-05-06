@@ -33,7 +33,6 @@ describe('Test Audio Routes', () => {
 
     it('POST /audio/upload', async done => {
         AudioService.configureAudioData = jest.fn().mockImplementation((a) => {
-            console.log("hello there")
             const req = a.body;
             return {
                 description: req.body.description,
@@ -92,7 +91,6 @@ describe('Test Audio Routes', () => {
     it('GET /audio/upload -- invalid input', async done => {
         const res = await request.get('/audio/InvalidAudioKey');
         expect(res.status).toBe(200)
-        console.log("body :", res.body)
         expect(res.body).toEqual(testData.rerutnGETInvalid)
         done()
     });

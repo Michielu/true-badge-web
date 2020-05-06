@@ -1,5 +1,4 @@
 const { MongoClient } = require('mongodb');
-const polyfill = require('@babel/polyfill');
 
 import BadgeService from "../../src/services/badgeService";
 import BadgeDataLayer from "../../src/dataLayer/BadgeDataLayer";

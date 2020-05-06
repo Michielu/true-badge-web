@@ -1,9 +1,4 @@
 const { MongoClient } = require('mongodb');
-const polyfill = require('@babel/polyfill');
-
-// import AudioService from "../../src/services/AudioService";
-// import AudioDataLayer from "../../src/dataLayer/AudioDataLayer";
-// import testData from '../config/audioTestData';
 
 describe('Test AudioRoutes', () => {
     let connection;
@@ -22,7 +17,7 @@ describe('Test AudioRoutes', () => {
         await connection.close();
     });
 
-    //Couldn't think of much to test hmmm
+    /* Not much to test  */
     it('Blank audio service test', async () => {
         const a = 1;
         expect(a).toEqual(1);

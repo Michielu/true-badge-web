@@ -1,9 +1,4 @@
 const { MongoClient } = require('mongodb');
-const polyfill = require('@babel/polyfill');
-
-// import ImageService from "../../src/services/ImageService";
-// import ImageDataLayer from "../../src/dataLayer/ImageDataLayer";
-// import testData from '../config/imageTestData';
 
 describe('Test ImageRoutes', () => {
     let connection;
@@ -22,7 +17,7 @@ describe('Test ImageRoutes', () => {
         await connection.close();
     });
 
-    //Couldn't think of much to test hmmm
+    /* Not much to test  */
     it('Blank image service test', async () => {
         const a = 1;
         expect(a).toEqual(1);

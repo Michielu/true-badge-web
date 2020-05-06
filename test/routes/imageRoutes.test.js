@@ -91,7 +91,6 @@ describe('Test Image Routes', () => {
     it('GET /image/upload -- invalid input', async done => {
         const res = await request.get('/image/InvalidImageKey');
         expect(res.status).toBe(200)
-        console.log("body :", res.body)
         expect(res.body).toEqual(testData.rerutnGETInvalid)
         done()
     });

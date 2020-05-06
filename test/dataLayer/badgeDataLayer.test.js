@@ -28,7 +28,6 @@ describe('Test badge dataLayer', () => {
     it('test badge post: stores badge', async () => {
         const badgeCollection = db.collection('test-badge');
         const res = await badgeCollection.findOne({ badgeURL: 'TimDoe3132' });
-        console.log({ res })
         delete res["_id"];
         delete testData.badgeDataLayerData.body["_id"];
 
@@ -53,9 +52,4 @@ describe('Test badge dataLayer', () => {
         const res = await BadgeDataLayer.get(db, 'invalidURL123');
         expect(res.result[0]).toEqual(undefined);
     });
-
-    it('test badge get: err', async () => {
-        //TODO how to get error response.. 
-    });
-
 });
