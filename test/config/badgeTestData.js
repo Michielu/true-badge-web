@@ -16,7 +16,9 @@ export const serviceData = {
         audioID: "ui23jgwk9sv8dv893k",
         timestamp: 1582858631340,
         badgeURL: "JohnDoe1339",
-        expirationCode: 1
+        expirationCode: 1,
+        email: undefined,
+        expirationDate: 1590634631340
     },
     badgeServiceDataExpected2: {
         name: "John Doe",
@@ -43,7 +45,9 @@ export const serviceData = {
         audioID: "ui23jgwk9sv8dv893k",
         timestamp: 1582858633456,
         badgeURL: "JohnDoe3454",
-        expirationCode: 1
+        expirationCode: 1,
+        email: undefined,
+        expirationDate: 1590634633456
     },
     badgeServiceFormulateBadgeData: {
         result: [{
@@ -97,7 +101,8 @@ export const routesData = {
         audioID: "asdsfasdferererere",
         timestamp: 1590737863133,
         badgeURL: "AnnDoe3132",
-        expirationCode: 1
+        expirationCode: 1,
+        expirationDate: 1598513863133
     },
     badgeRoutePostReturn: {
         name: "Ann Doe",
@@ -106,11 +111,33 @@ export const routesData = {
         timestamp: 1590737863133,
         badgeURL: "AnnDoe3132",
         expirationCode: 1,
-        isValidBadgeURL: true
+        isValidBadgeURL: true,
+        email: null,
+        expirationDate: 1598513863133
 
     },
     formulateBadgeDataInvalidURL: {
         isValidBadgeURL: false
+    },
+    badgeWithEmail: {
+        name: "Ann Joe",
+        imageID: "fdsfdfdfdfdfdfdfdf",
+        audioID: "asdsfasdferererere",
+        timestamp: 1590737863133,
+        badgeURL: "AnnJoe3132",
+        expirationCode: 1,
+        email: "testemail@emailemail.com"
+    },
+    badgeWithEmailExpected:
+    {
+        name: "Ann Joe",
+        imageID: "fdsfdfdfdfdfdfdfdf",
+        audioID: "asdsfasdferererere",
+        timestamp: 1590737863133,
+        badgeURL: "AnnJoe3132",
+        expirationCode: 1,
+        expirationDate: 1598513863133,
+        email: "testemail@emailemail.com"
     }
 }
 

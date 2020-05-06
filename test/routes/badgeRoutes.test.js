@@ -64,6 +64,19 @@ describe('Test Badge Routes', () => {
         done()
     });
 
+    it('POST /badge/upload -- with email', async done => {
+        const res = await request.post('/badge/upload')
+            .send(testData.badgeWithEmail)
+            .set('Accept', 'application/json');
+
+        const returnedJSON = JSON.parse(res.text);
+        delete returnedJSON.result["_id"];
+
+        expect(res.status).toBe(200)
+        expect(returnedJSON.result).toEqual(testData.badgeWithEmailExpected)
+        done()
+    });
+
     it('GET /b/:id', async done => {
         //Upload badge so it's not dependment on test one. 
         //Not testing /badge/upload in this test
