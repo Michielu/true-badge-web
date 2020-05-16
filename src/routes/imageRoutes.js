@@ -1,11 +1,10 @@
 
 import multer from 'multer';
 import multerStorage from '../config/multerStorage';
-
-const upload = multer({ storage: multerStorage });
-
 import ImageDataLayer from '../dataLayer/ImageDataLayer';
 import ImageService from '../services/imageService';
+
+const upload = multer({ storage: multerStorage });
 
 const BadgeImage = {
     post: (app, db) => {

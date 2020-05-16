@@ -1,7 +1,6 @@
 const fs = require('fs');
 const ObjectID = require('mongodb').ObjectID;
 
-
 const ImageService = {
     configureBadgeData: (req) => {
         const newImg = fs.readFileSync(req.file.path);

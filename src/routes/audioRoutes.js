@@ -1,11 +1,10 @@
 
 import multer from 'multer';
 import multerStorage from '../config/multerStorage';
-
-const upload = multer({ storage: multerStorage });
-
 import AudioDataLayer from '../dataLayer/AudioDataLayer';
 import AudioService from '../services/audioService';
+
+const upload = multer({ storage: multerStorage });
 
 const BadgeAudio = {
     post: (app, db) => {
