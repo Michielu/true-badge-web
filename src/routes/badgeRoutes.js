@@ -8,7 +8,7 @@ const Badge = {
             if (badgeData.err) {
                 res.send(badgeData.err);
             }
-            else {
+            else { //This solved the "Unhandled promise rejection. Thi..." node error warning
                 const response = await BadgeDataLayer.put(db, badgeData);
                 if (response.err) {
                     res.send({ "errorMessage": "Error creating badge", "errorMessageLong": "Error stroring badge to database" })
